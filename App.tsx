@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import { ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StatusBar, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { Text, View } from "./components/themed";
 import CharacterCard from "./components/charactercard";
+import GradientText from "./components/gradienttext";
 
 export default function App() {
   const [details, setDetails] = useState<Array<info>>([]);
@@ -14,18 +17,21 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.imageContainer}>
-        <Text style={styles.title}>Welcome to GOTapp</Text>
-        <Text style={styles.desc}>
+    <View style={[styles.container]}>
+      <StatusBar />
+      <ScrollView
+        style={styles.imageContainer}
+        contentContainerStyle={{ alignItems: "center" }}
+      >
+        <GradientText style={styles.title}>GOTapp</GradientText>
+        <Text style={[styles.desc]}>
           GOTapp is a all in all stop for GOT fans
         </Text>
         <Text style={styles.charTitle}>Characters</Text>
-        <View>
-          {details.map((data) => (
+        <View style={styles.infoContainer}>
+          {details.map((data: info) => (
             <CharacterCard
-              image={data.imageUrl}
-              name={data.fullName}
+              character={data}
               key={data.id}
             />
           ))}
@@ -38,27 +44,40 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     padding: 10,
-    marginTop: StatusBar.currentHeight,
+    paddingVertical: 20,
   },
   title: {
-    fontSize: 22,
+    fontSize: 50,
     fontWeight: "500",
+    backgroundColor: "transparent",
   },
   desc: {
-    fontSize: 18,
+    fontSize: 20,
     fontStyle: "italic",
     marginVertical: 10,
+    color: "#526D82",
   },
   charTitle: {
     fontSize: 20,
-    alignSelf: "flex-start",
-    marginTop: 20,
+    alignSelf: "center",
+    marginTop: 10,
     fontWeight: "500",
+    fontStyle: "italic",
+    color: "#526D82",
   },
   imageContainer: {
-    width: "100%",
+    flex: 1,
+  },
+  scrollView: {
+    alignItems: "center",
+  },
+  infoContainer: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
 });

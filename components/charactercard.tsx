@@ -1,31 +1,48 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Pressable } from "react-native";
+import { Text, View } from "./themed";
 
 interface CharacterCardProps {
-  image: string;
-  name: string;
+  character: info;
 }
 
-export default function CharacterCard({ image, name }: CharacterCardProps) {
+export default function CharacterCard({ character }: CharacterCardProps) {
   return (
-    <View style={styles.image}>
-      <Image
-        source={{
-          uri: image,
-          width: 300,
-          height: 300,
-        }}
-        alt={name}
-      />
-      <Text style={styles.name}>{name}</Text>
+    <View style={styles.container}>
+      <Pressable>
+        <Image
+          style={styles.image}
+          source={{
+            uri: character.imageUrl,
+            width: 120,
+            height: 120,
+          }}
+          alt={character.fullName}
+        />
+        <Text style={styles.name}>{character.fullName}</Text>
+      </Pressable>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  image: {
+  container: {
+    display: "flex",
     marginVertical: 20,
+    justifyContent: "center",
+    width: "40%",
+  },
+  image: {
+    borderWidth: 2,
+    borderColor: "#31363F",
+    borderRadius: 20,
+    alignSelf: "center",
+    marginBottom: 5,
   },
   name: {
-    fontSize: 20,
+    fontSize: 13,
+    alignSelf: "center",
+    fontStyle: "italic",
+    fontWeight: "600",
+    color: "#B9B4C7",
   },
 });
