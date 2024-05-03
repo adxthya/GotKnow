@@ -1,4 +1,10 @@
-import { Image, StyleSheet, Pressable, Modal } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  Modal,
+  TouchableOpacity,
+} from "react-native";
 import { Text, View } from "./themed";
 import { useState } from "react";
 import { useColorScheme } from "react-native";
@@ -32,7 +38,11 @@ export default function CharacterCard({ character }: CharacterCardProps) {
           setIsModalVisible(false);
         }}
       >
-        <View style={styles.modalContainer}>
+        <TouchableOpacity
+          style={styles.modalContainer}
+          activeOpacity={1}
+          onPressOut={() => setIsModalVisible(false)}
+        >
           <View
             style={[
               styles.modal,
@@ -59,14 +69,8 @@ export default function CharacterCard({ character }: CharacterCardProps) {
             <Text style={styles.modalText}>{character.fullName}</Text>
             <Text style={styles.modalHeader}>House</Text>
             <Text style={styles.modalText}>{character.family}</Text>
-            <Pressable
-              style={styles.modalButton}
-              onPress={() => setIsModalVisible(false)}
-            >
-              <Text>X</Text>
-            </Pressable>
           </View>
-        </View>
+        </TouchableOpacity>
       </Modal>
     </View>
   );
@@ -80,7 +84,7 @@ const styles = StyleSheet.create({
     width: "40%",
   },
   image: {
-    borderWidth: 2,
+    borderWidth: 4,
     borderColor: "#31363F",
     borderRadius: 20,
     alignSelf: "center",
@@ -115,16 +119,5 @@ const styles = StyleSheet.create({
   modalHeader: {
     fontStyle: "italic",
     textDecorationLine: "underline",
-  },
-  modalButton: {
-    alignSelf: "center",
-    borderWidth: 2,
-    borderColor: "red",
-    height: 40,
-    width: 40,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 10,
   },
 });
