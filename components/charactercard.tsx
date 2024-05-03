@@ -1,12 +1,14 @@
-import { Image, StyleSheet, Pressable, Modal, Button } from "react-native";
+import { Image, StyleSheet, Pressable, Modal } from "react-native";
 import { Text, View } from "./themed";
 import { useState } from "react";
+import { useColorScheme } from "react-native";
 
 interface CharacterCardProps {
   character: info;
 }
 
 export default function CharacterCard({ character }: CharacterCardProps) {
+  const colorScheme = useColorScheme();
   const [isModalVisible, setIsModalVisible] = useState(false);
   return (
     <View style={styles.container}>
@@ -23,6 +25,7 @@ export default function CharacterCard({ character }: CharacterCardProps) {
         <Text style={styles.name}>{character.fullName}</Text>
       </Pressable>
       <Modal
+        transparent
         visible={isModalVisible}
         animationType="fade"
         onRequestClose={() => {
@@ -30,9 +33,19 @@ export default function CharacterCard({ character }: CharacterCardProps) {
         }}
       >
         <View style={styles.modalContainer}>
-          <View style={styles.modal}>
+          <View
+            style={[
+              styles.modal,
+              {
+                backgroundColor: colorScheme === "dark" ? "#222831" : "#E5E1DA",
+              },
+            ]}
+          >
             <Image
-              style={[styles.image, { borderColor: "red" }]}
+              style={[
+                styles.image,
+                { borderColor: "gray", width: 150, height: 150 },
+              ]}
               source={{
                 uri: character.imageUrl,
                 width: 200,
@@ -40,14 +53,18 @@ export default function CharacterCard({ character }: CharacterCardProps) {
               }}
               alt={character.fullName}
             />
+            <Text style={styles.modalHeader}>Title</Text>
             <Text style={styles.modalText}>{character.title}</Text>
+            <Text style={styles.modalHeader}>Name</Text>
             <Text style={styles.modalText}>{character.fullName}</Text>
+            <Text style={styles.modalHeader}>House</Text>
             <Text style={styles.modalText}>{character.family}</Text>
-            <Button
-              title="Close"
-              color="midnightblue"
+            <Pressable
+              style={styles.modalButton}
               onPress={() => setIsModalVisible(false)}
-            ></Button>
+            >
+              <Text>X</Text>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -80,17 +97,34 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "rgba(52, 52, 52, 0.5)",
   },
   modal: {
-    padding: 20,
-    borderRadius: 10,
+    padding: 30,
+    paddingHorizontal: 50,
+    borderRadius: 20,
     borderWidth: 2,
     borderColor: "gray",
     alignSelf: "center",
-    backgroundColor: "#000",
   },
   modalText: {
     alignSelf: "center",
     fontSize: 18,
+    marginVertical: 5,
+  },
+  modalHeader: {
+    fontStyle: "italic",
+    textDecorationLine: "underline",
+  },
+  modalButton: {
+    alignSelf: "center",
+    borderWidth: 2,
+    borderColor: "red",
+    height: 40,
+    width: 40,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
   },
 });

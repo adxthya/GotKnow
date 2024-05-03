@@ -23,9 +23,9 @@ export default function App() {
         style={styles.imageContainer}
         contentContainerStyle={{ alignItems: "center" }}
       >
-        <GradientText style={styles.title}>GOTapp</GradientText>
+        <GradientText style={styles.title}>GotKnow</GradientText>
         <Text style={[styles.desc]}>
-          GOTapp is a all in all stop for GOT fans
+          GotKnow is a all in all stop for GOT fans
         </Text>
         <Text style={styles.charTitle}>Characters</Text>
         <View style={styles.infoContainer}>
@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 50,
-    fontWeight: "500",
     backgroundColor: "transparent",
+    fontStyle: "italic",
   },
   desc: {
     fontSize: 20,

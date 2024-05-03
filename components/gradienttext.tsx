@@ -13,7 +13,7 @@ const GradientText = (props: props) => {
   return (
     <MaskedView maskElement={<Text {...props} />}>
       <LinearGradient
-        colors={["red", "blue"]}
+        colors={["rgb(32, 38, 57)", "rgb(63, 76, 119)"]}
         start={{ x: 1, y: 0 }}
         end={{ x: 0, y: 1 }}
       >
