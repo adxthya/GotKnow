@@ -7,13 +7,15 @@ import { StyleProp, ViewStyle } from "react-native";
 interface props {
   children: ReactNode;
   style?: StyleProp<ViewStyle>;
+  firstColor: string;
+  secondColor: string;
 }
 
 const GradientText = (props: props) => {
   return (
     <MaskedView maskElement={<Text {...props} />}>
       <LinearGradient
-        colors={["rgb(32, 38, 57)", "rgb(63, 76, 119)"]}
+        colors={[props.firstColor, props.secondColor]}
         start={{ x: 1, y: 0 }}
         end={{ x: 0, y: 1 }}
       >
