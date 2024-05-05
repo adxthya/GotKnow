@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { ScrollView, StatusBar, StyleSheet } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { Image, ScrollView, StatusBar, StyleSheet } from "react-native";
 import { Text, View } from "./components/themed";
 import CharacterCard from "./components/charactercard";
 import GradientText from "./components/gradienttext";
@@ -23,11 +22,28 @@ export default function App() {
         style={styles.imageContainer}
         contentContainerStyle={{ alignItems: "center" }}
       >
-        <GradientText style={styles.title}>GotKnow</GradientText>
+        <GradientText
+          firstColor="rgb(32, 38, 57)"
+          secondColor="rgb(63, 76, 119)"
+          style={styles.title}
+        >
+          GotKnow
+        </GradientText>
+        <Image
+          style={styles.image}
+          source={require("./assets/got.jpg")}
+        />
         <Text style={[styles.desc]}>
-          GotKnow is a all in all stop for GOT fans
+          GotKnow is a all in all stop for GOT fans. Explore about your
+          favourite characters and get to know them more.
         </Text>
-        <Text style={styles.charTitle}>Characters</Text>
+        <GradientText
+          secondColor="rgb(63, 61, 61)"
+          firstColor="rgba(35, 35, 35, 0.8)"
+          style={styles.charTitle}
+        >
+          Characters
+        </GradientText>
         <View style={styles.infoContainer}>
           {details.map((data: info) => (
             <CharacterCard
@@ -46,7 +62,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     padding: 10,
-    paddingVertical: 20,
+    paddingVertical: 15,
   },
   title: {
     fontSize: 50,
@@ -58,9 +74,10 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     marginVertical: 10,
     color: "#526D82",
+    textAlign: "center",
   },
   charTitle: {
-    fontSize: 20,
+    fontSize: 25,
     alignSelf: "center",
     marginTop: 10,
     fontWeight: "500",
@@ -79,5 +96,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
+  },
+  image: {
+    width: 300,
+    height: 170,
+    borderWidth: 2,
+    borderColor: "#31363F",
+    borderRadius: 20,
+    objectFit: "cover",
+    marginVertical: 10,
   },
 });
