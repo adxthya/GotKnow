@@ -8,7 +8,7 @@ This is a React Native app built with Expo, designed for fans of Game of Thrones
 * View detailed information for each character, including:
     * House affiliation
     * Titles
-    * (Optional) Image
+    * Image
 
 ### Getting Started
 
